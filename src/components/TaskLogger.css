@@ -1,41 +1,68 @@
 .task-logger-form {
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 400px;
-  margin: 100px auto;
-  padding: 20px;
-  background-color: #f4f4f8;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  
 }
 
 .task-logger-form input,
 .task-logger-form select {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  outline: none;
-  transition: border-color 0.3s;
-}
-
-.task-logger-form input:focus,
-.task-logger-form select:focus {
-  border-color: #007bff;
+  padding: 6px 10px;
+  font-size: 14px;
+  flex: 1;
+  min-width: 180px;
 }
 
 .task-logger-form button {
-  padding: 10px 16px;
-  font-size: 16px;
+  padding: 6px 12px;
+  font-size: 14px;
   background-color: #007bff;
-  color: white;
+  color: #fff;
   border: none;
-  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  border-radius: 4px;
 }
 
 .task-logger-form button:hover {
   background-color: #0056b3;
+}
+
+.task-history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-history-item {
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.not-started {
+  color: #777;
+}
+
+.in-progress {
+  color: #ff9800;
+}
+
+.completed {
+  color: #4caf50;
+}
+
+@media (max-width: 600px) {
+  .task-logger-form {
+    flex-direction: column;
+  }
+
+  .task-logger-form input,
+  .task-logger-form select,
+  .task-logger-form button {
+    width: 100%;
+  }
 }

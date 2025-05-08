@@ -14,6 +14,7 @@ const Profile = () => {
     department: 'Engineering',
     status: 'Active',
     profileImage: 'https://cdn.dribbble.com/users/5534/screenshots/14230133/profile_4x.jpg',
+    github: 'https://github.com/priyananthan17',
   });
 
   const [passwords, setPasswords] = useState({
@@ -57,6 +58,7 @@ const Profile = () => {
 
   return (
     <div className="profile-page">
+      <h1 style={{marginTop:'-700px'}}>Profile</h1>
       <div className="profile-card">
         <div className="profile-left">
           <img
@@ -72,7 +74,7 @@ const Profile = () => {
         <div className="profile-right">
           {isEditing ? (
             <>
-              {['fullName', 'email', 'joinedOn', 'address', 'phone', 'department'].map((field) => (
+              {['fullName', 'email', 'joinedOn', 'address', 'phone', 'department', 'github'].map((field) => (
                 <div className="profile-info" key={field}>
                   <strong>{field.replace(/([A-Z])/g, ' $1')}: </strong>
                   <input
@@ -101,6 +103,12 @@ const Profile = () => {
               <p className="profile-info"><strong>Phone:</strong> {profileData.phone}</p>
               <p className="profile-info"><strong>Department:</strong> {profileData.department}</p>
               <p className="profile-info"><strong>Status:</strong> {profileData.status}</p>
+              <p className="profile-info">
+                <strong>GitHub:</strong>{' '}
+                <a href={profileData.github} target="_blank" rel="noopener noreferrer" style ={{ textDecoration: 'none', color: 'blue' }}>
+                  {profileData.github}
+                </a>
+              </p>
             </>
           )}
 
@@ -115,7 +123,7 @@ const Profile = () => {
           {showPasswordBox && (
             <div className="password-box">
               <div>
-                <label>Old Password:</label>
+                <label>Old Password: </label>
                 <input
                   type="password"
                   name="oldPassword"

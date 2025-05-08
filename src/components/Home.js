@@ -22,7 +22,7 @@ const Home = () => {
       <section className="ads-section">
         <h3>Sponsored</h3>
         <div className="ad-block">
-          <p>💼 Boost your productivity with our premium plan!</p>
+          <p>Boost your productivity with our premium plan!</p>
         </div>
       </section>
     </div>

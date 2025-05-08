@@ -8,6 +8,7 @@ const userData = [
         status: "active",
         date: "2025-5-01",
         profilePicture: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        github: "https://github.com/priyananthan17",
         tasks: [
             { id: 1, title: "Task 1", description: "Description 1", status: "completed" },
             { id: 2, title: "Task 2", description: "Description 2", status: "in-progress" },
@@ -26,6 +27,7 @@ const userData = [
         status: "inactive",
         date: "2025-5-02",
         profilePicture: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        github: "https://github.com/priyananthan17",
         tasks: [
             { id: 1, title: "Task 3", description: "Description 3", status: "not-started" },
             { id: 2, title: "Task 4", description: "Description 4", status: "completed" },
@@ -44,6 +46,7 @@ const userData = [
         status: "active",
         date: "2025-5-03",
         profilePicture: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        github: "https://github.com/priyananthan17",
         tasks: [
             { id: 1, title: "Task 5", description: "Description 5", status: "completed" },
             { id: 2, title: "Task 6", description: "Description 6", status: "in-progress" },
@@ -62,6 +65,7 @@ const userData = [
         status: "inactive",
         date: "2025-5-04",
         profilePicture: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        github: "https://github.com/priyananthan17",
         tasks: [
             { id: 1, title: "Task 7", description: "Description 7", status: "not-started" },
             { id: 2, title: "Task 8", description: "Description 8", status: "completed" },
@@ -80,6 +84,7 @@ const userData = [
         status: "active",
         date: "2025-5-05",
         profilePicture: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        github: "https://github.com/priyananthan17",
         tasks: [
             { id: 1, title: "Task 9", description: "Description 9", status: "completed" },
             { id: 2, title: "Task 10", description: "Description 10", status: "in-progress" },
@@ -98,6 +103,7 @@ const userData = [
         status: "inactive",
         date: "2025-5-06",
         profilePicture: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        github: "https://github.com/priyananthan17",
         tasks: [
             { id: 1, title: "Task 11", description: "Description 11", status: "not-started" },
             { id: 2, title: "Task 12", description: "Description 12", status: "completed" },
@@ -116,6 +122,7 @@ const userData = [
         status: "active",
         date: "2025-5-07",
         profilePicture: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        github: "https://github.com/priyananthan17",
         tasks: [
             { id: 1, title: "Task 13", description: "Description 13", status: "completed" },
             { id: 2, title: "Task 14", description: "Description 14", status: "in-progress" },
@@ -134,6 +141,7 @@ const userData = [
         status: "inactive",
         date: "2025-5-08",
         profilePicture: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        github: "https://github.com/priyananthan17",
         tasks: [
             { id: 1, title: "Task 15", description: "Description 15", status: "not-started" },
             { id: 2, title: "Task 16", description: "Description 16", status: "completed" },
@@ -152,6 +160,7 @@ const userData = [
         status: "active",
         date: "2025-5-09",
         profilePicture: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        github: "https://github.com/priyananthan17",
         tasks: [
             { id: 1, title: "Task 17", description: "Description 17", status: "completed" },
             { id: 2, title: "Task 18", description: "Description 18", status: "in-progress" },
@@ -170,6 +179,7 @@ const userData = [
         status: "inactive",
         date: "2025-5-10",
         profilePicture: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        github: "https://github.com/priyananthan17",
         tasks: [
             { id: 1, title: "Task 19", description: "Description 19", status: "not-started" },
             { id: 2, title: "Task 20", description: "Description 20", status: "completed" },
@@ -188,6 +198,7 @@ const userData = [
         status: "active",
         date: "2025-5-11",
         profilePicture: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        github: "https://github.com/priyananthan17",
         tasks: [
             { id: 1, title: "Task 21", description: "Description 21", status: "completed" },
             { id: 2, title: "Task 22", description: "Description 22", status: "in-progress" },
@@ -206,6 +217,7 @@ const userData = [
         status: "inactive",
         date: "2025-5-12",
         profilePicture: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        github: "https://github.com/priyananthan17",
         tasks: [
             { id: 1, title: "Task 23", description: "Description 23", status: "not-started" },
             { id: 2, title: "Task 24", description: "Description 24", status: "completed" },
@@ -224,6 +236,7 @@ const userData = [
         status: "active",
         date: "2025-5-13",
         profilePicture: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        github: "https://github.com/priyananthan17",
         tasks: [
             { id: 1, title: "Task 25", description: "Description 25", status: "completed" },
             { id: 2, title: "Task 26", description: "Description 26", status: "in-progress" },
@@ -242,6 +255,7 @@ const userData = [
         status: "inactive",
         date: "2025-5-14",
         profilePicture: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        github: "https://github.com/priyananthan17",
         tasks: [
             { id: 1, title: "Task 27", description: "Description 27", status: "not-started" },
             { id: 2, title: "Task 28", description: "Description 28", status: "completed" },
@@ -260,6 +274,7 @@ const userData = [
         status: "active",
         date: "2025-5-15",
         profilePicture: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        github: "https://github.com/priyananthan17",
         tasks: [
             { id: 1, title: "Task 29", description: "Description 29", status: "completed" },
             { id: 2, title: "Task 30", description: "Description 30", status: "in-progress" },

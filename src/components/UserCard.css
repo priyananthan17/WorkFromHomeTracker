@@ -39,4 +39,8 @@
     color: red;
     font-weight: bold;
   }
+  .user-card-link {
+    text-decoration: none;
+    color: inherit;
+  }
   

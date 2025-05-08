@@ -10,16 +10,15 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Check credentials
+  
     if (username === 'nanthu' && password === '12345678') {
       localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('username', 'nanthu'); // Store username
-      navigate('/'); // Navigate to Home after login
+      localStorage.setItem('username', 'nanthu');
+      navigate('/'); 
     } else if (username === 'admin' && password === '12345678') {
       localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('username', 'admin'); // Store username
-      navigate('/'); // Navigate to Home after login
+      localStorage.setItem('username', 'admin');
+      navigate('/');
     } else {
       setError('Invalid credentials');
     }

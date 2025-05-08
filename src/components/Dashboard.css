@@ -1,22 +1,51 @@
 .dashboard {
   padding: 20px;
   font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
 }
+
 .controls {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 20px;
 }
-.user-table {
-  width: 100%;
-  border-collapse: collapse;
+
+.input-control {
+  padding: 5px 10px;
+  font-size: 14px;
 }
-.user-table th, .user-table td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: left;
+
+.sort-button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
   cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
 }
-.user-table th:hover {
-  background-color: #f0f0f0;
+
+.sort-button:hover {
+  background-color: #0056b3;
 }
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .controls {
+    flex-direction: column;
+  }
+
+  .input-control,
+  .sort-button {
+    width: 100%;
+  }
+}
+
+

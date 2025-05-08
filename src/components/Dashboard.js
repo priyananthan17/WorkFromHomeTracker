@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import userData from '../data/userData';
 import UserCard from './UserCard';
+import './Dashboard.css';
 
 const Dashboard = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -34,27 +35,31 @@ const Dashboard = () => {
   });
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div className="dashboard">
       <h1>Dashboard</h1>
 
-      <div style={{ marginBottom: '20px' }}>
+      <div className="controls">
         <input
           type="text"
           placeholder="Search by name..."
           value={searchTerm}
           onChange={handleSearchChange}
-          style={{ marginRight: '10px', padding: '5px' }}
+          className="input-control"
         />
-        <select value={filterStatus} onChange={handleFilterChange} style={{ marginRight: '10px', padding: '5px' }}>
+        <select
+          value={filterStatus}
+          onChange={handleFilterChange}
+          className="input-control"
+        >
           <option value="all">All Statuses</option>
           <option value="active">Active</option>
           <option value="inactive">Inactive</option>
         </select>
-        <button onClick={() => handleSort('name')}style={{ marginRight: '10px', padding: '5px' }}>Sort by Name</button>
-        <button onClick={() => handleSort('department')} style={{ marginRight: '10px', padding: '5px' }}>Sort by Department</button>
+        <button onClick={() => handleSort('name')} className="sort-button">Sort by Name</button>
+        <button onClick={() => handleSort('department')} className="sort-button">Sort by Department</button>
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
+      <div className="card-grid">
         {sortedData.map(user => (
           <UserCard key={user.id} user={user} />
         ))}

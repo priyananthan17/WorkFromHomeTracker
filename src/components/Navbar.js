@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import './Navbar.css';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -10,74 +11,30 @@ const Navbar = () => {
   };
 
   return (
-    <nav style={styles.nav}>
-      <NavLink 
-        to="/" 
-        style={{ 
-          ...styles.title, 
-          textDecoration: 'none', 
-          color: 'white', 
-          fontSize: '24px', 
-          fontWeight: 'bold' 
-        }}
-      >
+    <nav className="navbar">
+      <NavLink to="/" className="navbar-title">
         WFHT
       </NavLink>
-      <div style={styles.links}>
-        <NavLink to="/" style={getLinkStyle} end>
+      <div className="navbar-links">
+        <NavLink to="/" className="navbar-link" end>
           Home
         </NavLink>
-        <NavLink to="/dashboard" style={getLinkStyle}>
+        <NavLink to="/dashboard" className="navbar-link">
           Dashboard
         </NavLink>
-        <NavLink to="/profile" style={getLinkStyle}>
+        <NavLink to="/profile" className="navbar-link">
           Profile
         </NavLink>
-        <NavLink to="/taskLogger" style={getLinkStyle}>
+        <NavLink to="/taskLogger" className="navbar-link">
           Task Logger
         </NavLink>
-        <NavLink to="/SummaryForm" style={getLinkStyle}>
+        <NavLink to="/SummaryForm" className="navbar-link">
           Summary
         </NavLink>
-        <button onClick={handleLogout} style={styles.logoutButton}>Logout</button>
+        <button onClick={handleLogout} className="navbar-logout-button">Logout</button>
       </div>
     </nav>
   );
 };
-
-const styles = {
-  nav: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '1rem',
-    backgroundColor: '#0077b6',
-    color: '#fff',
-  },
-  title: {
-    margin: 0,
-  },
-  links: {
-    display: 'flex',
-    gap: '1rem',
-    alignItems: 'center',
-  },
-  logoutButton: {
-    padding: '0.5rem 1rem',
-    backgroundColor: '#ff4c4c',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    fontWeight: 'bold',
-  },
-};
-
-const getLinkStyle = ({ isActive }) => ({
-  color: isActive ? '#ffd60a' : '#fff',
-  textDecoration: 'none',
-  fontWeight: 'bold',
-  borderBottom: isActive ? '2px solid #ffd60a' : 'none',
-});
 
 export default Navbar;
