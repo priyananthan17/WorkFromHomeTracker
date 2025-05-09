@@ -43,22 +43,21 @@
   transform: scale(1.05);
 }
 
-/* Ads section */
-.ads-section {
+/* Ads section
+.adsection {
   background: linear-gradient(135deg, #cfeff3, #ffffff);
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 20px;
-  display: block;
   text-align: center;
 }
 
-.ad-block {
+.adblock {
   background-color: #ffcc00;
   padding: 10px;
   border-radius: 5px;
   font-weight: bold;
-}
+} */
 
 .cards-section {
   display: flex;

@@ -92,9 +92,9 @@ const Home = () => {
         </button>
       </section>
 
-      <div className="ads-section">
+      <div style={{ backgroundColor: "e0f7fz", padding: "20px", margin: "20px 0",fontStyle:"italic" }}>
         <h3>Sponsored</h3>
-        <div className="ad-block">
+        <div style={{backgroundColor: "#ffcc00", padding: "10px", borderRadius: "5px"}}>
           <p>Boost your productivity with our premium plan!</p>
         </div>
       </div>
@@ -123,7 +123,6 @@ const Home = () => {
       <section className="footer">
         <p>&copy; 2025 WFHT. All rights reserved.</p>
       </section>
-
     </div>
   );
 };
