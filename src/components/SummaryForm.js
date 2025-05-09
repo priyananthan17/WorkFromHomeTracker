@@ -13,12 +13,8 @@ const SummaryForm = () => {
       setError('All fields are required!');
       return;
     }
-    
-    // Handle the submission directly here (e.g., log the data)
     const summaryData = { text, teamLead, email };
     console.log('Summary Submitted:', summaryData);
-    
-    // Clear the form after submission
     setText('');
     setTeamLead('');
     setEmail('');
