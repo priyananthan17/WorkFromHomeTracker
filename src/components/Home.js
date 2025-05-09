@@ -97,7 +97,7 @@ const Home = () => {
         <div className="ad-block">
           <p>Boost your productivity with our premium plan!</p>
         </div>
-      </section>
+      
 
       <section className="cards-section">
         {cardData.map((card, index) => (
@@ -119,6 +119,11 @@ const Home = () => {
           </div>
         ))}
       </section>
+      </section>
+      <section className="footer">
+        <p>&copy; 2025 WFHT. All rights reserved.</p>
+      </section>
+
     </div>
   );
 };
