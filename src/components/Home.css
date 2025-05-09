@@ -1,54 +1,75 @@
+/* General container styling */
 .home-container {
   text-align: center;
   padding: 20px;
   background: linear-gradient(135deg, #e0f7fa, #ffffff);
+  min-height: 100vh;
 }
 
+/* Header styling */
 .home-header {
   background-color: #0077b6;
   color: white;
   padding: 20px;
   border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Action buttons section */
 .home-actions {
   margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
 
+/* Buttons */
 .action-button {
   background-color: #0056b3;
   color: white;
-  padding: 10px 15px;
+  padding: 12px 18px;
+  font-size: 16px;
+  font-weight: bold;
   margin: 5px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .action-button:hover {
   background-color: #003d7a;
+  transform: scale(1.05);
 }
 
+/* Ads section */
 .ads-section {
-  background: linear-gradient(135deg, #e0f7fa, #ffffff);
+  background: linear-gradient(135deg, #cfeff3, #ffffff);
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 20px;
+  display: block;
+  text-align: center;
 }
 
 .ad-block {
   background-color: #ffcc00;
   padding: 10px;
   border-radius: 5px;
+  font-weight: bold;
 }
 
+/* Cards section */
 .cards-section {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+  padding: 20px;
 }
 
+/* Individual card styling */
 .card {
   background-color: white;
   padding: 15px;
@@ -56,18 +77,50 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   width: 250px;
   text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Card header */
 .card-header {
   display: flex;
   align-items: center;
   gap: 10px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
+/* Card footer */
 .card-footer {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
   font-size: 12px;
   color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cards-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+  }
+
+  .home-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .action-button {
+    width: 80%;
+  }
 }
