@@ -30,12 +30,12 @@
     font-size: 0.95rem;
   }
   
-  .active {
+  .activestatus {
     color: green;
     font-weight: bold;
   }
   
-  .inactive {
+  .inactivestatus { 
     color: red;
     font-weight: bold;
   }

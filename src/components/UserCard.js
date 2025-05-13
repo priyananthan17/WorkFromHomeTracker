@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './UserCard.css';
 
 const UserCard = ({ user }) => {
+  const status = user.status;
   return (
     <Link to={`/details/${user.id}`} className="user-card-link">
       <div className="user-card">
@@ -11,7 +12,7 @@ const UserCard = ({ user }) => {
         <p><strong>Email:</strong> {user.email}</p>
         <p><strong>Phone:</strong> {user.phone}</p>
         <p><strong>Department:</strong> {user.department}</p>
-        <p><strong>Status:</strong> <span className={user.status}>{user.status}</span></p>
+        <p><strong>Status:</strong> <span className={status === 'active' ? 'activestatus' : 'inactivestatus'}>{user.status}</span></p>
         <p><strong>Date Joined:</strong> {user.date}</p>
       </div>
     </Link>
