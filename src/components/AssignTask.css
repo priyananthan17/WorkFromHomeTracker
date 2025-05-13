@@ -1,0 +1,44 @@
+.assign-task-container{
+background: linear-gradient(135deg, #e0f7fa, #ffffff);
+padding: 20px;
+height: 85vh;
+display: flex;
+}
+.assign-task {
+  max-width: 500px;
+  margin: auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+.assign-task h2 {
+  margin-bottom: 1rem;
+}
+
+.assign-task select,
+.assign-task input {
+  width: 100%;
+  padding: 10px;
+  margin: 0.5rem 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.assign-task button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.fixed-textarea {
+  resize: none;
+  width: 100%;
+  min-height: 100px;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

@@ -9,11 +9,15 @@ const Dashboard = () => {
   const [filterStatus, setFilterStatus] = useState('all');
   const [sortKey, setSortKey] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
+  const [showForm, setShowForm] = useState(false);
 
   const [newUser, setNewUser] = useState({
     name: '',
     status: 'active',
     department: '',
+    email: '',
+    phone: '',
+    location: '',
   });
 
   const handleSearchChange = (e) => setSearchTerm(e.target.value);
@@ -34,7 +38,8 @@ const Dashboard = () => {
   };
 
   const handleAddUser = () => {
-    if (!newUser.name || !newUser.department) return;
+    const { name, department, email, phone, location } = newUser;
+    if (!name || !department || !email || !phone || !location) return;
 
     const newUserData = {
       ...newUser,
@@ -42,7 +47,15 @@ const Dashboard = () => {
     };
 
     setUsers([...users, newUserData]);
-    setNewUser({ name: '', status: 'active', department: '' });
+    setNewUser({
+      name: '',
+      status: 'active',
+      department: '',
+      email: '',
+      phone: '',
+      location: '',
+    });
+    setShowForm(false); 
   };
 
   const filteredData = users.filter(user => {
@@ -81,37 +94,66 @@ const Dashboard = () => {
         </select>
         <button onClick={() => handleSort('name')} className="sort-button">Sort by Name</button>
         <button onClick={() => handleSort('department')} className="sort-button">Sort by Department</button>
+        <button onClick={() => setShowForm(!showForm)} className="new-user-button">
+          {showForm ? 'Cancel' : 'New User'}
+        </button>
       </div>
 
-      <div className="add-user-form">
-        <h2>Add New User</h2>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={newUser.name}
-          onChange={handleInputChange}
-          className="input-control"
-        />
-        <input
-          type="text"
-          name="department"
-          placeholder="Department"
-          value={newUser.department}
-          onChange={handleInputChange}
-          className="input-control"
-        />
-        <select
-          name="status"
-          value={newUser.status}
-          onChange={handleInputChange}
-          className="input-control"
-        >
-          <option value="active">Active</option>
-          <option value="inactive">Inactive</option>
-        </select>
-        <button onClick={handleAddUser} className="add-button">Add User</button>
-      </div>
+      {showForm && (
+        <div className="add-user-form">
+          <h2>Add New User</h2>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={newUser.name}
+            onChange={handleInputChange}
+            className="input-control"
+          />
+          <input
+            type="text"
+            name="department"
+            placeholder="Department"
+            value={newUser.department}
+            onChange={handleInputChange}
+            className="input-control"
+          />
+          <select
+            name="status"
+            value={newUser.status}
+            onChange={handleInputChange}
+            className="input-control"
+          >
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={newUser.email}
+            onChange={handleInputChange}
+            className="input-control"
+          />
+          <input
+            type="text"
+            name="phone"
+            placeholder="Phone"
+            value={newUser.phone}
+            onChange={handleInputChange}
+            className="input-control"
+          />
+          <input
+            type="text"
+            name="location"
+            placeholder="Location"
+            value={newUser.location}
+            onChange={handleInputChange}
+            className="input-control"
+          />
+          <button onClick={handleAddUser} className="add-button">Add User</button>
+        </div>
+      )}
 
       <div className="card-grid">
         {sortedData.map(user => (

@@ -284,6 +284,25 @@ const userData = [
             { id: 2, name: "Project 30", description: "Description 30", status: "completed" },
         ],
     },
+    {
+        id: 16,
+        name: "Nina",
+        email: "nina@gmail.com",
+        phone: "4455667788",
+        department: "HR",
+        status: "active",
+        date: "2025-5-16",
+        profilePicture: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        github: "https://github.com/priyananthan17",
+        tasks: [
+            { id: 1, title: "Task 31", description: "Description 31", status: "not-started" },
+            { id: 2, title: "Task 32", description: "Description 32", status: "completed" },
+        ],
+        projects: [
+            { id: 1, name: "Project 31", description: "Description 31", status: "inactive" },
+            { id: 2, name: "Project 32", description: "Description 32", status: "active" },
+        ],
+    },
 
 ];
 export default userData;

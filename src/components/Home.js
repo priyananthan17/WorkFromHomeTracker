@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { GitHub, LinkedIn } from "@mui/icons-material";
+import initialUserData from '../data/userData';
 import "./Home.css";
 
 const cardData = [
@@ -70,6 +71,9 @@ const cardData = [
 const Home = () => {
   const navigate = useNavigate();
 
+  const username = localStorage.getItem("username") || "";
+  const users = initialUserData.find((user) => user.name === username);
+  const matchedUser = users ? users : { id: null };
   return (
     <div className="home-container">
       <header className="home-header">
@@ -78,7 +82,7 @@ const Home = () => {
       </header>
 
       <section className="home-actions">
-        <button className="action-button" onClick={() => navigate("/dashboard")} aria-label="Go to Dashboard">
+        <button className="action-button" onClick={() => navigate(`/user-dashboard/${matchedUser.id}`)} aria-label="Go to Dashboard">
           Go to Dashboard
         </button>
         <button className="action-button" onClick={() => navigate("/taskLogger")} aria-label="Log a Task">
@@ -87,7 +91,7 @@ const Home = () => {
         <button className="action-button" onClick={() => navigate("/SummaryForm")} aria-label="Submit Summary">
           Submit Summary
         </button>
-        <button className="action-button" onClick={() => navigate("/profile")} aria-label="View Profile">
+        <button className="action-button" onClick={() => navigate(`/user-profile`)} aria-label="View Profile">
           View Profile
         </button>
       </section>

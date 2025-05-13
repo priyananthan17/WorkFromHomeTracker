@@ -1,0 +1,45 @@
+.admin-dashboard-container {
+ 
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
+}
+.admin-dashboard {
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
+  height: 530px;
+  
+}
+
+.admin-dashboard h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.dashboard-section {
+  margin-bottom: 30px;
+}
+
+.dashboard-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.stats {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.stat-box {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  flex: 1 1 200px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  font-size: 1.2rem;
+  color: #2e5bff;
+  font-weight: bold;
+  text-align: center;
+}

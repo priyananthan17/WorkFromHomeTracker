@@ -22,6 +22,7 @@ const SummaryForm = () => {
   };
 
   return (
+    <div className="summary-form-background" >
     <div className="summary-form-container">
       <h1 className="summary-form-title">Summary</h1>
       {error && <p className="error-message">{error}</p>}
@@ -60,6 +61,7 @@ const SummaryForm = () => {
         </div>
         <button type="submit" className="submit-button">Submit Summary</button>
       </form>
+    </div>
     </div>
   );
 };

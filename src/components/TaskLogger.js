@@ -1,63 +1,125 @@
-import React, { useState } from 'react';
-import taskData from '../data/userData';
-import './TaskLogger.css';
+import React, { useState, useEffect } from "react";
+import "./TaskLogger.css";
 
 const TaskLogger = () => {
-  const [task, setTask] = useState({
-    title: '',
-    description: '',
-    status: 'not-started',
+  const username = localStorage.getItem("username") || "";
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState({
+    description: "",
+    date: "",
+    status: "Pending",
   });
 
-  const [taskHistory, setTaskHistory] = useState(taskData); 
+  useEffect(() => {
+    const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    const userTasks = savedTasks.filter((task) => task.username === username);
+    setTasks(userTasks);
+  }, [username]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewTask((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  const handleAddTask = () => {
+    if (newTask.description && newTask.date) {
+      const task = {
+        username,
+        description: newTask.description,
+        date: newTask.date,
+        status: newTask.status,
+        id: new Date().getTime(),
+        createdAt: new Date().toISOString(), 
+        completedAt: null, 
+      };
+      const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      savedTasks.push(task);
+      localStorage.setItem("tasks", JSON.stringify(savedTasks));
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setTaskHistory([...taskHistory, task]); 
-    setTask({ title: '', description: '', status: 'not-started' });
+      setTasks((prev) => [...prev, task]);
+
+      setNewTask({
+        description: "",
+        date: "",
+        status: "Pending",
+      });
+    } else {
+      alert("Please fill out the task description and date.");
+    }
+  };
+
+  const handleStatusChange = (taskId, status) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId
+        ? {
+            ...task,
+            status,
+            completedAt: status === "Completed" ? new Date().toISOString() : null, 
+          }
+        : task
+    );
+    setTasks(updatedTasks);
+
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
 
   return (
-    <div style={{ padding: '10px', background: 'linear-gradient(135deg, #e0f7fa, #ffffff)' }}>
-      <h2 style={{ fontSize: '30px' }}>Task Logger</h2>
-
-      <form className="task-logger-form" onSubmit={handleSubmit}>
+    <div className="task-logger-container">
+    <div className="task-logger">
+      <h2>Task Logger for {username}</h2>
+      <div className="task-form">
         <input
-          placeholder="Title"
-          value={task.title}
-          onChange={(e) => setTask({ ...task, title: e.target.value })}
+          type="text"
+          name="description"
+          placeholder="Task description"
+          value={newTask.description}
+          onChange={handleChange}
         />
         <input
-          placeholder="Description"
-          value={task.description}
-          onChange={(e) => setTask({ ...task, description: e.target.value })}
+          type="date"
+          name="date"
+          value={newTask.date}
+          onChange={handleChange}
         />
         <select
-          value={task.status}
-          onChange={(e) => setTask({ ...task, status: e.target.value })}
+          name="status"
+          value={newTask.status}
+          onChange={handleChange}
         >
-          <option value="not-started">Not Started</option>
-          <option value="in-progress">In Progress</option>
-          <option value="completed">Completed</option>
+          <option value="Pending">Pending</option>
+          <option value="Completed">Completed</option>
         </select>
-        <button type="submit">Submit Task</button>
-      </form>
+        <button onClick={handleAddTask}>Add Task</button>
+      </div>
 
-      <hr style={{ margin: '20px 0' }} />
-
-      <h3 style={{ fontSize: '24px' }}>Task History</h3>
-      {taskHistory.length === 0 ? (
-        <p>No tasks logged yet.</p>
-      ) : (
-        <ul className="task-history-list">
-          {taskHistory.map((item, index) => (
-            <li key={index} className="task-history-item">
-              <strong>{item.title}</strong> - {item.description} (
-              <span className={item.status}>{item.status}</span>)
-            </li>
-          ))}
-        </ul>
-      )}
+      <h3>Existing Task History</h3>
+      <div className="task-history">
+        {tasks.length > 0 ? (
+          tasks.map((task) => (
+            <div className="task-item" key={task.id}>
+              <div>
+                <strong>{task.description}</strong>
+                <p>Created On: {new Date(task.createdAt).toLocaleString()}</p>
+                {task.completedAt && (
+                  <p>Completed On: {new Date(task.completedAt).toLocaleString()}</p>
+                )}
+              </div>
+              <div>
+                <span>Status: {task.status}</span>
+                {task.status === "Pending" && (
+                  <button onClick={() => handleStatusChange(task.id, "Completed")} style={{ marginLeft: "10px" }}>
+                    Mark as Completed
+                  </button>
+                )}
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No tasks logged yet.</p>
+        )}
+      </div>
+    </div>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import userData from '../data/userData';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -10,15 +11,20 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
-    if (username === 'nanthu' && password === '12345678') {
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('username', 'nanthu');
-      navigate('/'); 
-    } else if (username === 'admin' && password === '12345678') {
+
+    if (username === 'admin' && password === '12345678') {
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('username', 'admin');
-      navigate('/');
+      localStorage.setItem('role', 'admin');
+      navigate('/admin/dashboard');
+      return;
+    }
+    const matchedUser = userData.find(user => user.name === username && password === '12345678');
+    if (matchedUser) {
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('username', matchedUser.name);
+      localStorage.setItem('role', 'user');
+      navigate('/home');
     } else {
       setError('Invalid credentials');
     }
