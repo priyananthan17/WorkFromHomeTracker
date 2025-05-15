@@ -1,125 +1,165 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import initialUserData from "../data/userData";
 import "./TaskLogger.css";
 
 const TaskLogger = () => {
-  const username = localStorage.getItem("username") || "";
-  const [tasks, setTasks] = useState([]);
+  const navigate = useNavigate();
+  const username = localStorage.getItem("username") || "Guest";
+  const loggedUser = initialUserData.find((user) => user.name === username) || {
+    id: null,
+    name: "Guest",
+    tasks: [],
+  };
+
+  const [tasks, setTasks] = useState(loggedUser.tasks || []);
+  const [completionDates, setCompletionDates] = useState({});
   const [newTask, setNewTask] = useState({
+    title: "",
     description: "",
-    date: "",
-    status: "Pending",
+    dueDate: "",
   });
+  const [error, setError] = useState("");
 
-  useEffect(() => {
-    const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    const userTasks = savedTasks.filter((task) => task.username === username);
-    setTasks(userTasks);
-  }, [username]);
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewTask((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setNewTask((prev) => ({ ...prev, [name]: value }));
+    setError("");
   };
+
   const handleAddTask = () => {
-    if (newTask.description && newTask.date) {
-      const task = {
-        username,
-        description: newTask.description,
-        date: newTask.date,
-        status: newTask.status,
-        id: new Date().getTime(),
-        createdAt: new Date().toISOString(), 
-        completedAt: null, 
-      };
-      const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-      savedTasks.push(task);
-      localStorage.setItem("tasks", JSON.stringify(savedTasks));
-
-      setTasks((prev) => [...prev, task]);
-
-      setNewTask({
-        description: "",
-        date: "",
-        status: "Pending",
-      });
-    } else {
-      alert("Please fill out the task description and date.");
+    if (!newTask.title || !newTask.dueDate) {
+      setError("Title and due date are required.");
+      return;
     }
+    const newTaskData = {
+      id: Date.now(),
+      title: newTask.title,
+      description: newTask.description,
+      createdAt: new Date().toISOString().split("T")[0],
+      status: "not-started",
+      completedAt: null,
+    };
+    setTasks((prev) => [...prev, newTaskData]);
+    setNewTask({ title: "", description: "", dueDate: "" });
+    setError("");
   };
 
-  const handleStatusChange = (taskId, status) => {
+  const handleDateChange = (taskId, date) => {
+    setCompletionDates((prev) => ({
+      ...prev,
+      [taskId]: date,
+    }));
+    setError("");
+  };
+
+  const handleComplete = (taskId) => {
+    const completionDate = completionDates[taskId];
+    if (!completionDate) {
+      setError("Please select a completion date.");
+      return;
+    }
     const updatedTasks = tasks.map((task) =>
       task.id === taskId
-        ? {
-            ...task,
-            status,
-            completedAt: status === "Completed" ? new Date().toISOString() : null, 
-          }
+        ? { ...task, status: "completed", completedAt: completionDate }
         : task
     );
     setTasks(updatedTasks);
-
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    setCompletionDates((prev) => ({
+      ...prev,
+      [taskId]: "",
+    }));
+    setError("");
   };
 
-  return (
-    <div className="task-logger-container">
-    <div className="task-logger">
-      <h2>Task Logger for {username}</h2>
-      <div className="task-form">
-        <input
-          type="text"
-          name="description"
-          placeholder="Task description"
-          value={newTask.description}
-          onChange={handleChange}
-        />
-        <input
-          type="date"
-          name="date"
-          value={newTask.date}
-          onChange={handleChange}
-        />
-        <select
-          name="status"
-          value={newTask.status}
-          onChange={handleChange}
+  if (!loggedUser.id && username === "Guest") {
+    return (
+      <div className="container">
+        <h1 className="header">Task Logger</h1>
+        <p className="no-user">Please log in to manage tasks.</p>
+        <button
+          className="action-button"
+          onClick={() => navigate("/login")}
+          aria-label="Go to Login"
         >
-          <option value="Pending">Pending</option>
-          <option value="Completed">Completed</option>
-        </select>
-        <button onClick={handleAddTask}>Add Task</button>
+          Go to Login
+        </button>
       </div>
+    );
+  }
 
-      <h3>Existing Task History</h3>
-      <div className="task-history">
-        {tasks.length > 0 ? (
-          tasks.map((task) => (
-            <div className="task-item" key={task.id}>
-              <div>
-                <strong>{task.description}</strong>
-                <p>Created On: {new Date(task.createdAt).toLocaleString()}</p>
-                {task.completedAt && (
-                  <p>Completed On: {new Date(task.completedAt).toLocaleString()}</p>
-                )}
-              </div>
-              <div>
-                <span>Status: {task.status}</span>
-                {task.status === "Pending" && (
-                  <button onClick={() => handleStatusChange(task.id, "Completed")} style={{ marginLeft: "10px" }}>
-                    Mark as Completed
-                  </button>
-                )}
-              </div>
-            </div>
-          ))
-        ) : (
-          <p>No tasks logged yet.</p>
-        )}
+  return (
+    <div className="container">
+      <h1 className="header">Welcome, {loggedUser.name}</h1>
+      <div className="task-card task-card--add">
+        <h3>Add New Task</h3>
+        {error && <p className="error-message">{error}</p>}
+        <div className="form-row">
+          <input
+            type="text"
+            name="title"
+            value={newTask.title}
+            onChange={handleInputChange}
+            placeholder="Task Title"
+            aria-label="Task Title"
+          />
+          <input
+            type="text"
+            name="description"
+            value={newTask.description}
+            onChange={handleInputChange}
+            placeholder="Task Description"
+            aria-label="Task Description"
+          />
+          <input
+            type="date"
+            name="dueDate"
+            value={newTask.dueDate}
+            onChange={handleInputChange}
+            min="2025-05-01"
+            aria-label="Due Date"
+          />
+          <button onClick={handleAddTask} aria-label="Add Task">
+            Add Task
+          </button>
+        </div>
       </div>
-    </div>
+      {tasks.length > 0 ? (
+        tasks.map((task, index) => (
+          <div
+            key={task.id}
+            className="task-card"
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
+            <h3 style={{ textDecoration: task.status === "completed" ? "line-through" : "none" }}>
+              {task.title}
+            </h3>
+            <p>{task.description || "No description provided."}</p>
+            <p>Status: {task.status}</p>
+            <p>Created: {task.createdAt}</p>
+            {task.completedAt && <p>Completed: {task.completedAt}</p>}
+            {(task.status === "not-started" || task.status === "in-progress") && (
+              <div className="form-row">
+                <input
+                  type="date"
+                  value={completionDates[task.id] || ""}
+                  onChange={(e) => handleDateChange(task.id, e.target.value)}
+                  min="2025-05-01"
+                  aria-label="Completion Date"
+                />
+                <button
+                  onClick={() => handleComplete(task.id)}
+                  aria-label="Set Completion Date"
+                >
+                  Set Completion
+                </button>
+              </div>
+            )}
+          </div>
+        ))
+      ) : (
+        <p className="no-user">No tasks available.</p>
+      )}
     </div>
   );
 };

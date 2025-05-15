@@ -1,93 +1,273 @@
-.dashboard {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #e0f7fa, #ffffff);
+.all-users-container {
+  background: linear-gradient(135deg, #b3e5fc, #e1bee7);
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.all-users {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.all-users:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.all-users h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #0f172a;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.all-users h1:hover {
+  color: #1d4ed8;
+}
+
+.error-message {
+  color: #dc2626;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 0.5rem;
+  background-color: #fff1f2;
+  border-radius: 8px;
+  margin-bottom: 1rem;
 }
 
 .controls {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.input-control {
-  padding: 5px 10px;
-  font-size: 14px;
-}
-
-.sort-button {
-  padding: 5px 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-.sort-button:hover {
-  background-color: #0056b3;
-}
-
-.card-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  gap: 1rem;
+  margin-bottom: 2rem;
   justify-content: center;
 }
 
-@media (max-width: 600px) {
-  .controls {
-    flex-direction: column;
-  }
-
-  .input-control,
-  .sort-button {
-    width: 100%;
-  }
-}
-
-
-.add-user-form {
-  margin: 20px 0;
-  padding: 15px;
-  background-color: #f5f5f5;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 400px;
-}
-
 .input-control {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  color: #1f2937;
+  min-width: 150px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.add-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px;
+.input-control:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  outline: none;
+}
+
+.sort-button,
+.new-user-button,
+.add-button,
+.back-button,
+.logout-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.add-button:hover {
-  background-color: #45a049;
+.sort-button {
+  background-color: #6b7280;
+  color: #ffffff;
 }
+
+.sort-button:hover {
+  background-color: #4b5563;
+  transform: translateY(-2px);
+}
+
+.sort-button.sort-active {
+  background-color: #2563eb;
+}
+
+.sort-button.sort-active:hover {
+  background-color: #1d4ed8;
+}
+
 .new-user-button {
-  background-color: #1d8af7;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 0px;
+  background-color: #22c55e;
+  color: #ffffff;
 }
 
 .new-user-button:hover {
-  background-color: #0973c9;
+  background-color: #16a34a;
+  transform: translateY(-2px);
+}
+
+.add-button {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.add-button:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.back-button {
+  background-color: #6b7280;
+  color: #ffffff;
+}
+
+.back-button:hover {
+  background-color: #4b5563;
+  transform: translateY(-2px);
+}
+
+.logout-button {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+.logout-button:hover {
+  background-color: #b91c1c;
+  transform: translateY(-2px);
+}
+
+.sort-button:focus,
+.new-user-button:focus,
+.add-button:focus,
+.back-button:focus,
+.logout-button:focus {
+  outline: 2px solid #ffcc00;
+  outline-offset: 2px;
+}
+
+.add-user-form {
+  background-color: #f9fafb;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-user-form h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1d4ed8;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.no-users {
+  font-size: 1.1rem;
+  color: #374151;
+  text-align: center;
+  padding: 1rem;
+}
+
+.dashboard-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .all-users-container {
+    padding: 1.5rem;
+  }
+
+  .all-users {
+    padding: 1.5rem;
+  }
+
+  .all-users h1 {
+    font-size: 1.5rem;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .input-control,
+  .sort-button,
+  .new-user-button,
+  .add-button,
+  .back-button,
+  .logout-button {
+    font-size: 0.95rem;
+    padding: 0.6rem;
+    width: 100%;
+  }
+
+  .add-user-form h2 {
+    font-size: 1.25rem;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .all-users-container {
+    padding: 1rem;
+  }
+
+  .all-users {
+    padding: 1rem;
+  }
+
+  .all-users h1 {
+    font-size: 1.25rem;
+  }
+
+  .input-control,
+  .sort-button,
+  .new-user-button,
+  .add-button,
+  .back-button,
+  .logout-button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  .add-user-form h2 {
+    font-size: 1.1rem;
+  }
+
+  .no-users {
+    font-size: 1rem;
+  }
 }

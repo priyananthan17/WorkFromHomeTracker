@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams ,Link} from 'react-router-dom';
 import userData from '../data/userData';
 import './UserDashboard.css';
 
@@ -38,14 +38,15 @@ const UserDashboard = () => {
         </div>
       </div>
 
-      <div className="stats-section">
-        <div className="card1">
+      <div className="stats-section" >
+        <Link to={`/task-logger`} className="card1">
+        <div >
           <h3>Tasks</h3>
           <p>Total: {taskCount.total}</p>
           <p>Completed: {taskCount.completed}</p>
           <p>In Progress: {taskCount.inProgress}</p>
           <p>Not Started: {taskCount.notStarted}</p>
-        </div>
+        </div></Link>
         <div className="card1">
           <h3>Projects</h3>
           <p>Total: {projectCount.total}</p>

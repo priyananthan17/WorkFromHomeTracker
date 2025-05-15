@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import initialUserData from '../data/userData';
+import initialUserData from '../data/userData'; // Rename to avoid conflict
 import UserCard from './UserCard';
 import './AllUsers.css';
 
@@ -38,7 +38,7 @@ const Dashboard = () => {
 
     const newUserData = {
       ...newUser,
-      id: users.length + 1,
+      id: users.length + 1, // Simple ID generation
     };
 
     setUsers([...users, newUserData]);

@@ -1,31 +1,40 @@
 import React, { useState } from "react";
 import initialUserData from "../data/userData";
-import "./Profile.css"
+import "./Profile.css";
 
 const UserProfile = () => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [showPasswordBox, setShowPasswordBox] = useState(false);
-
   const username = localStorage.getItem("username") || "";
-  const users = initialUserData.find((user) => user.name === username);
-  const matchedUser = users ? users : { id: null };
+  
+  const storedProfile = localStorage.getItem("userProfileData");
+  const parsedProfile = storedProfile ? JSON.parse(storedProfile) : null;
+
+  const userFromData = initialUserData.find((user) => user.name === username);
+  const user = parsedProfile && parsedProfile.name === username ? parsedProfile : userFromData;
 
   const [profileData, setProfileData] = useState({
-    fullName: matchedUser.name || "",
-    email: matchedUser.email || "",
-    joinedOn: matchedUser.date || "",
-    address: matchedUser.location || "",
-    phone: matchedUser.phone || "",
-    department: matchedUser.department || "",
-    status: matchedUser.status || "Active",
-    profileImage: matchedUser.profilePicture || "",
-    github: matchedUser.github || "",
+    fullName: user?.name || "",
+    email: user?.email || "",
+    joinedOn: user?.date || "",
+    address: user?.location || "",
+    phone: user?.phone || "",
+    department: user?.department || "",
+    status: user?.status || "Active",
+    profileImage: user?.profilePicture || "",
+    github: user?.github || "",
+    password: user?.password || "", 
   });
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [showPasswordBox, setShowPasswordBox] = useState(false);
 
   const [passwords, setPasswords] = useState({
     oldPassword: "",
     newPassword: "",
   });
+
+  const saveProfileData = (data) => {
+    localStorage.setItem("userProfileData", JSON.stringify(data));
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,8 +54,8 @@ const UserProfile = () => {
 
   const toggleEdit = () => {
     if (isEditing) {
+      saveProfileData(profileData);
       alert("Profile updated successfully!");
-      localStorage.setItem("userProfile", JSON.stringify(profileData));
     }
     setIsEditing((prev) => !prev);
   };
@@ -55,21 +64,22 @@ const UserProfile = () => {
     setShowPasswordBox((prev) => !prev);
   };
 
-  const handleProfileImageChange = () => {
-    const newImageUrl = prompt("Enter a new profile image URL:");
-    if (newImageUrl) {
-      setProfileData((prevData) => ({
-        ...prevData,
-        profileImage: newImageUrl,
-      }));
-    }
-  };
-
   const handleSubmitPassword = () => {
     if (!passwords.oldPassword || !passwords.newPassword) {
       alert("Please fill in both fields.");
       return;
     }
+    if (passwords.oldPassword !== profileData.password) {
+      alert("Old password is incorrect.");
+      return;
+    }
+    const updatedProfile = {
+      ...profileData,
+      password: passwords.newPassword,
+    };
+    setProfileData(updatedProfile);
+    saveProfileData(updatedProfile);
+
     alert("Password changed successfully.");
     setPasswords({ oldPassword: "", newPassword: "" });
     setShowPasswordBox(false);
@@ -95,7 +105,14 @@ const UserProfile = () => {
             alt="Profile"
             className="profile-image"
           />
-          <button className="edit-photo-button" onClick={handleProfileImageChange}>
+          <button className="edit-photo-button" onClick={() => {
+            const newImageUrl = prompt("Enter a new profile image URL:");
+            if (newImageUrl) {
+              const updatedProfile = { ...profileData, profileImage: newImageUrl };
+              setProfileData(updatedProfile);
+              saveProfileData(updatedProfile);
+            }
+          }}>
             Edit Photo
           </button>
         </div>

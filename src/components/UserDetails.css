@@ -1,20 +1,45 @@
+/* Container for the entire UserDetails component */
+.user-details-container {
+  background: linear-gradient(135deg, #b3e5fc, #e1bee7);
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Main user details card */
 .user-details {
   max-width: 900px;
-  margin: 2rem auto;
+  margin: 0 auto;
   padding: 2rem;
   background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', sans-serif;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.user-details:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* User name heading */
 .user-details h2 {
   font-size: 2rem;
+  font-weight: 600;
   margin-bottom: 1rem;
   text-align: center;
-  color: #2c3e50;
+  color: #0f172a;
+  transition: color 0.3s ease;
 }
 
+.user-details h2:hover {
+  color: #1d4ed8;
+}
+
+/* Profile image */
 .detail-image {
   display: block;
   width: 160px;
@@ -22,27 +47,64 @@
   border-radius: 50%;
   object-fit: cover;
   margin: 0 auto 1.5rem;
-  border: 4px solid #3498db;
+  border: 4px solid #2563eb;
+  transition: border-color 0.3s ease;
 }
 
+.detail-image:hover {
+  border-color: #1d4ed8;
+}
+
+/* Fallback for broken/missing images */
+.detail-image[alt=""]::after,
+.detail-image[src=""]::after {
+  content: "No Image";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 160px;
+  background-color: #f3f4f6;
+  color: #6b7280;
+  font-size: 1rem;
+  border-radius: 50%;
+  border: 4px solid #2563eb;
+}
+
+/* User details text */
 .user-details p {
   font-size: 1rem;
   margin: 0.5rem 0;
-  color: #34495e;
+  color: #374151;
 }
 
+/* Bold labels */
 .user-details strong {
-  color: #2c3e50;
+  color: #0f172a;
 }
 
+/* Status styling */
+.activestatus {
+  color: #22c55e;
+  font-weight: 500;
+}
+
+.inactivestatus {
+  color: #ef4444;
+  font-weight: 500;
+}
+
+/* Section headings (Tasks, Projects, GitHub) */
 .user-details h3 {
   margin-top: 2rem;
   font-size: 1.25rem;
-  color: #2980b9;
-  border-bottom: 2px solid #ecf0f1;
+  font-weight: 600;
+  color: #2563eb;
+  border-bottom: 2px solid #e5e7eb;
   padding-bottom: 0.25rem;
 }
 
+/* Task/Project lists */
 .user-details ul {
   list-style: none;
   padding: 0;
@@ -50,21 +112,114 @@
 }
 
 .user-details ul li {
-  background-color: #f4f6f7;
+  background-color: #f9fafb;
   margin: 0.4rem 0;
   padding: 0.6rem 1rem;
   border-radius: 8px;
-  transition: background 0.3s;
+  font-size: 0.95rem;
+  color: #374151;
+  transition: background-color 0.3s ease;
 }
 
 .user-details ul li:hover {
-  background-color: #e2e8f0;
+  background-color: #e5e7eb;
 }
 
-@media (max-width: 700px) {
-  .user-details {
-    padding: 1rem;
+/* GitHub section */
+.github-preview {
+  margin-top: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.github-link {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.github-link:hover {
+  color: #1d4ed8;
+}
+
+.github-link:focus {
+  outline: 2px solid #ffcc00;
+  outline-offset: 2px;
+}
+
+.github-stats {
+  max-width: 100%;
+  width: 500px;
+  border-radius: 12px;
+  display: block;
+}
+
+/* Chat button (mailto link) */
+.chat-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 0.75rem 1.5rem;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.chat-button:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.chat-button:focus {
+  outline: 2px solid #ffcc00;
+  outline-offset: 2px;
+}
+
+.back-button {
+  margin: 1rem 0;
+  padding: 0.75rem 1.5rem;
+  background-color: #6b7280;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #4b5563;
+  transform: translateY(-2px);
+}
+
+.back-button:focus {
+  outline: 2px solid #ffcc00;
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .user-details-container {
+    padding: 1.5rem;
   }
+
+  .user-details {
+    padding: 1.5rem;
+  }
+
   .user-details h2 {
     font-size: 1.5rem;
   }
@@ -77,42 +232,60 @@
   .user-details p {
     font-size: 0.95rem;
   }
-}
-.github-preview {
-  margin-top: 2rem;
-  text-align: center;
+
+  .user-details h3 {
+    font-size: 1.15rem;
+  }
+
+  .user-details ul li {
+    font-size: 0.9rem;
+  }
+
+  .github-stats {
+    width: 100%;
+  }
+
+  .chat-button,
+  .back-button {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 0.95rem;
+  }
 }
 
-.github-link {
-  display: inline-block;
-  margin-bottom: 1rem;
-  font-weight: bold;
-  color: #2c3e50;
-  text-decoration: none;
-  transition: color 0.3s;
-}
+@media (max-width: 480px) {
+  .user-details-container {
+    padding: 1rem;
+  }
 
-.github-link:hover {
-  color: #3498db;
-}
+  .user-details {
+    padding: 1rem;
+  }
 
-.github-stats {
-  max-width: 100%;
-  margin: 0.5rem 0;
-  border-radius: 12px;
-}
-.chat-button {
-  margin: 10px 0;
-  padding: 10px 20px;
-  background-color: #1976d2;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+  .user-details h2 {
+    font-size: 1.25rem;
+  }
 
-.chat-button:hover {
-  background-color: #0d47a1;
+  .detail-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .user-details p {
+    font-size: 0.9rem;
+  }
+
+  .user-details h3 {
+    font-size: 1rem;
+  }
+
+  .user-details ul li {
+    font-size: 0.85rem;
+  }
+
+  .chat-button,
+  .back-button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
 }

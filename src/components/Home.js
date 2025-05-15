@@ -1,79 +1,16 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import { GitHub, LinkedIn } from "@mui/icons-material";
-import initialUserData from '../data/userData';
+import initialUserData from "../data/userData";
 import "./Home.css";
-
-const cardData = [
-  {
-    name: "GitHub",
-    url: "https://github.com/",
-    icon: <GitHub fontSize="large" />,
-    description: "GitHub is a web-based hosting service for version control of code using Git.",
-    installs: 835,
-    updated: "May 4, 2025",
-  },
-  {
-    name: "LinkedIn",
-    url: "https://www.linkedin.com/feed/",
-    icon: <LinkedIn fontSize="large" />,
-    description: "LinkedIn is a portal for searching for jobs and displaying skills.",
-    installs: 85,
-    updated: "May 4, 2025",
-  },
-  {
-    name: "Rentify",
-    url: "https://rentifybikerental.netlify.app/",
-    icon: (
-      <img
-        src="https://www.rentify.co.ug/static/media/logo.d1ab13c39a6f82ee2d93.png"
-        alt="Rentify Logo"
-        width="40"
-      />
-    ),
-    description:
-      "Rentify is a bike rental platform offering affordable, convenient, and reliable two-wheeler rentals for travelers and commuters.",
-    installs: 205,
-    updated: "May 7, 2025",
-  },
-  {
-    name: "Dropbox",
-    url: "https://www.dropbox.com/",
-    icon: (
-      <img
-        src="https://d33wubrfki0l68.cloudfront.net/33b6aba6009f1635ca406dc2383b9a774bbe5118/2d63b/images/integrations/dropbox.png"
-        alt="Dropbox Logo"
-        width="40"
-      />
-    ),
-    description:
-      "Dropbox is a file hosting service that offers cloud storage, file synchronization, and a personal cloud.",
-    installs: 125,
-    updated: "May 8, 2025",
-  },
-  {
-    name: "Medium",
-    url: "https://medium.com/",
-    icon: (
-      <img
-        src="https://www.pngrepo.com/png/165281/180/medium.png"
-        alt="Medium Logo"
-        width="40"
-      />
-    ),
-    description:
-      "Medium is an online publishing platform developed by Evan Williams, launched in August 2012.",
-    installs: 100,
-    updated: "May 8, 2025",
-  },
-];
+import cardData from "../data/AdsData";
 
 const Home = () => {
   const navigate = useNavigate();
+  const username = localStorage.getItem("username") || "Guest";
+  const matchedUser = initialUserData.find((user) => user.name === username) || {
+    id: null,
+    name: "Guest",
+  };
 
-  const username = localStorage.getItem("username") || "";
-  const users = initialUserData.find((user) => user.name === username);
-  const matchedUser = users ? users : { id: null };
   return (
     <div className="home-container">
       <header className="home-header">
@@ -82,26 +19,45 @@ const Home = () => {
       </header>
 
       <section className="home-actions">
-        <button className="action-button" onClick={() => navigate(`/user-dashboard/${matchedUser.id}`)} aria-label="Go to Dashboard">
+        <button
+          className="action-button"
+          onClick={() => navigate(`/user-dashboard/${matchedUser.id}`)}
+          aria-label="Go to Dashboard"
+        >
           Go to Dashboard
         </button>
-        <button className="action-button" onClick={() => navigate("/taskLogger")} aria-label="Log a Task">
+        <button
+          className="action-button"
+          onClick={() => navigate("/task-logger")}
+          aria-label="Log a Task"
+        >
           Log a Task
         </button>
-        <button className="action-button" onClick={() => navigate("/SummaryForm")} aria-label="Submit Summary">
+        <button
+          className="action-button"
+          onClick={() => navigate("/summary-form")}
+          aria-label="Submit Summary"
+        >
           Submit Summary
         </button>
-        <button className="action-button" onClick={() => navigate(`/user-profile`)} aria-label="View Profile">
+        <button
+          className="action-button"
+          onClick={() => navigate("/user-profile")}
+          aria-label="View Profile"
+        >
           View Profile
         </button>
       </section>
 
-      <div style={{ backgroundColor: "e0f7fz", padding: "20px", margin: "20px 0",fontStyle:"italic" }}>
+      <section className="adsection">
         <h3>Sponsored</h3>
-        <div style={{backgroundColor: "#ffcc00", padding: "10px", borderRadius: "5px"}}>
+        <div className="adblock">
           <p>Boost your productivity with our premium plan!</p>
+          <button className="action-button" aria-label="Learn More About Premium">
+            Learn More
+          </button>
         </div>
-      </div>
+      </section>
 
       <section className="cards-section">
         {cardData.map((card, index) => (
@@ -109,7 +65,14 @@ const Home = () => {
             key={index}
             className="card"
             onClick={() => window.open(card.url, "_blank", "noopener,noreferrer")}
-            style={{ cursor: "pointer" }}
+            tabIndex={0}
+            role="button"
+            aria-label={`Visit ${card.name}`}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                window.open(card.url, "_blank", "noopener,noreferrer");
+              }
+            }}
           >
             <div className="card-header">
               {card.icon}
@@ -123,10 +86,10 @@ const Home = () => {
           </div>
         ))}
       </section>
-     
-      <section className="footer">
-        <p>&copy; 2025 WFHT. All rights reserved.</p>
-      </section>
+
+      <footer className="footer">
+        <p>© 2025 WFHT. All rights reserved.</p>
+      </footer>
     </div>
   );
 };

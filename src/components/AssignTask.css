@@ -1,44 +1,188 @@
-.assign-task-container{
-background: linear-gradient(135deg, #e0f7fa, #ffffff);
-padding: 20px;
-height: 85vh;
-display: flex;
-}
-.assign-task {
-  max-width: 500px;
-  margin: auto;
+.assign-task-container {
+  background: linear-gradient(135deg, #b3e5fc, #e1bee7);
+  min-height: 100vh;
   padding: 2rem;
-  background: #ffffff;
-  border-radius: 10px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.assign-task {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.assign-task:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .assign-task h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #0f172a;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.assign-task h2:hover {
+  color: #1d4ed8;
+}
+
+.error-message {
+  color: #dc2626;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 0.5rem;
+  background-color: #fff1f2;
+  border-radius: 8px;
   margin-bottom: 1rem;
 }
 
-.assign-task select,
-.assign-task input {
-  width: 100%;
-  padding: 10px;
-  margin: 0.5rem 0;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.assign-task button {
-  padding: 10px 15px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.fixed-textarea {
-  resize: none;
-  width: 100%;
-  min-height: 100px;
-  padding: 8px;
+.form-group label {
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.input-control {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  color: #1f2937;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-control:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  outline: none;
+}
+
+textarea.input-control {
+  resize: none;
+  min-height: 100px;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  
+}
+
+.assign-button,
+.back-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.assign-button {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.assign-button:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.back-button {
+  background-color: #6b7280;
+  color: #ffffff;
+}
+
+.back-button:hover {
+  background-color: #4b5563;
+  transform: translateY(-2px);
+}
+
+.assign-button:focus,
+.back-button:focus {
+  outline: 2px solid #ffcc00;
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .assign-task-container {
+    padding: 1.5rem;
+  }
+
+  .assign-task {
+    padding: 1.5rem;
+  }
+
+  .assign-task h2 {
+    font-size: 1.5rem;
+  }
+
+  .form-group label {
+    font-size: 0.95rem;
+  }
+
+  .input-control {
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+
+  .assign-button,
+  .back-button {
+    font-size: 0.95rem;
+    padding: 0.6rem;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .assign-task-container {
+    padding: 1rem;
+  }
+
+  .assign-task {
+    padding: 1rem;
+  }
+
+  .assign-task h2 {
+    font-size: 1.25rem;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .input-control {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  .assign-button,
+  .back-button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
 }

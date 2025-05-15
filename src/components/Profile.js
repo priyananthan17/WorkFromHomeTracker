@@ -1,26 +1,40 @@
-import React, { useState } from 'react';
-import './Profile.css';
+import React, { useState } from "react";
+import initialUserData from "../data/AdminData";
+import "./Profile.css";
 
-const Profile = () => {
+const UserProfile = () => {
+  const username = localStorage.getItem("username") || "";
+  
+  const storedProfile = localStorage.getItem("userProfileData");
+  const parsedProfile = storedProfile ? JSON.parse(storedProfile) : null;
+
+  const userFromData = initialUserData.find((user) => user.name === username);
+  const user = parsedProfile && parsedProfile.name === username ? parsedProfile : userFromData;
+
+  const [profileData, setProfileData] = useState({
+    fullName: user?.name || "",
+    email: user?.email || "",
+    joinedOn: user?.date || "",
+    address: user?.location || "",
+    phone: user?.phone || "",
+    department: user?.department || "",
+    status: user?.status || "Active",
+    profileImage: user?.profilePicture || "",
+    github: user?.github || "",
+    password: user?.password || "", 
+  });
+
   const [isEditing, setIsEditing] = useState(false);
   const [showPasswordBox, setShowPasswordBox] = useState(false);
 
-  const [profileData, setProfileData] = useState({
-    fullName: 'Nanthu',
-    email: 'nanthu@gmail.com',
-    joinedOn: '2022-03-25',
-    address: '123 Main St, Hosur, India',
-    phone: '1234567890',
-    department: 'Engineering',
-    status: 'Active',
-    profileImage: 'https://cdn.dribbble.com/users/5534/screenshots/14230133/profile_4x.jpg',
-    github: 'https://github.com/priyananthan17',
+  const [passwords, setPasswords] = useState({
+    oldPassword: "",
+    newPassword: "",
   });
 
-  const [passwords, setPasswords] = useState({
-    oldPassword: '',
-    newPassword: '',
-  });
+  const saveProfileData = (data) => {
+    localStorage.setItem("userProfileData", JSON.stringify(data));
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,6 +53,10 @@ const Profile = () => {
   };
 
   const toggleEdit = () => {
+    if (isEditing) {
+      saveProfileData(profileData);
+      alert("Profile updated successfully!");
+    }
     setIsEditing((prev) => !prev);
   };
 
@@ -46,27 +64,55 @@ const Profile = () => {
     setShowPasswordBox((prev) => !prev);
   };
 
-  const handleProfileImageChange = () => {
-    const newImageUrl = prompt('Enter a new profile image URL:');
-    if (newImageUrl) {
-      setProfileData((prevData) => ({
-        ...prevData,
-        profileImage: newImageUrl,
-      }));
+  const handleSubmitPassword = () => {
+    if (!passwords.oldPassword || !passwords.newPassword) {
+      alert("Please fill in both fields.");
+      return;
     }
+    if (passwords.oldPassword !== profileData.password) {
+      alert("Old password is incorrect.");
+      return;
+    }
+    const updatedProfile = {
+      ...profileData,
+      password: passwords.newPassword,
+    };
+    setProfileData(updatedProfile);
+    saveProfileData(updatedProfile);
+
+    alert("Password changed successfully.");
+    setPasswords({ oldPassword: "", newPassword: "" });
+    setShowPasswordBox(false);
+  };
+
+  const fieldLabels = {
+    fullName: "Full Name",
+    email: "Email",
+    joinedOn: "Joined On",
+    address: "Address",
+    phone: "Phone",
+    department: "Department",
+    github: "GitHub",
   };
 
   return (
     <div className="profile-page">
-      <h1 style={{marginTop:'-700px'}}>Profile</h1>
       <div className="profile-card">
+        <h1>Profile</h1>
         <div className="profile-left">
           <img
             src={profileData.profileImage}
             alt="Profile"
             className="profile-image"
           />
-          <button className="edit-photo-button" onClick={handleProfileImageChange}>
+          <button className="edit-photo-button" onClick={() => {
+            const newImageUrl = prompt("Enter a new profile image URL:");
+            if (newImageUrl) {
+              const updatedProfile = { ...profileData, profileImage: newImageUrl };
+              setProfileData(updatedProfile);
+              saveProfileData(updatedProfile);
+            }
+          }}>
             Edit Photo
           </button>
         </div>
@@ -74,9 +120,9 @@ const Profile = () => {
         <div className="profile-right">
           {isEditing ? (
             <>
-              {['fullName', 'email', 'joinedOn', 'address', 'phone', 'department', 'github'].map((field) => (
+              {Object.keys(fieldLabels).map((field) => (
                 <div className="profile-info" key={field}>
-                  <strong>{field.replace(/([A-Z])/g, ' $1')}: </strong>
+                  <strong>{fieldLabels[field]}:</strong>
                   <input
                     type="text"
                     name={field}
@@ -87,7 +133,11 @@ const Profile = () => {
               ))}
               <div className="profile-info">
                 <strong>Status:</strong>
-                <select name="status" value={profileData.status} onChange={handleChange}>
+                <select
+                  name="status"
+                  value={profileData.status}
+                  onChange={handleChange}
+                >
                   <option value="Active">Active</option>
                   <option value="Inactive">Inactive</option>
                   <option value="On Leave">On Leave</option>
@@ -96,16 +146,35 @@ const Profile = () => {
             </>
           ) : (
             <>
-              <p className="profile-info"><strong>Full Name:</strong> {profileData.fullName}</p>
-              <p className="profile-info"><strong>Email:</strong> {profileData.email}</p>
-              <p className="profile-info"><strong>Joined On:</strong> {profileData.joinedOn}</p>
-              <p className="profile-info"><strong>Address:</strong> {profileData.address}</p>
-              <p className="profile-info"><strong>Phone:</strong> {profileData.phone}</p>
-              <p className="profile-info"><strong>Department:</strong> {profileData.department}</p>
-              <p className="profile-info"><strong>Status:</strong> {profileData.status}</p>
               <p className="profile-info">
-                <strong>GitHub:</strong>{' '}
-                <a href={profileData.github} target="_blank" rel="noopener noreferrer" style ={{ textDecoration: 'none', color: 'blue' }}>
+                <strong>Full Name:</strong> {profileData.fullName}
+              </p>
+              <p className="profile-info">
+                <strong>Email:</strong> {profileData.email}
+              </p>
+              <p className="profile-info">
+                <strong>Joined On:</strong> {profileData.joinedOn}
+              </p>
+              <p className="profile-info">
+                <strong>Address:</strong> {profileData.address}
+              </p>
+              <p className="profile-info">
+                <strong>Phone:</strong> {profileData.phone}
+              </p>
+              <p className="profile-info">
+                <strong>Department:</strong> {profileData.department}
+              </p>
+              <p className="profile-info">
+                <strong>Status:</strong> {profileData.status}
+              </p>
+              <p className="profile-info">
+                <strong>GitHub:</strong>{" "}
+                <a
+                  href={profileData.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: "none", color: "blue" }}
+                >
                   {profileData.github}
                 </a>
               </p>
@@ -113,7 +182,7 @@ const Profile = () => {
           )}
 
           <button className="edit-button" onClick={toggleEdit}>
-            {isEditing ? 'Save Profile' : 'Edit Profile'}
+            {isEditing ? "Save Profile" : "Edit Profile"}
           </button>
 
           <button className="change-password-button" onClick={togglePasswordBox}>
@@ -140,7 +209,9 @@ const Profile = () => {
                   onChange={handlePasswordChange}
                 />
               </div>
-              <button className="submit-password">Submit</button>
+              <button className="submit-password" onClick={handleSubmitPassword}>
+                Submit
+              </button>
             </div>
           )}
         </div>
@@ -149,4 +220,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default UserProfile;

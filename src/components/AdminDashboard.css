@@ -1,45 +1,214 @@
 .admin-dashboard-container {
- 
-  background: linear-gradient(135deg, #e0f7fa, #ffffff);
-}
-.admin-dashboard {
-  padding: 30px;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #e0f7fa, #ffffff);
-  height: 530px;
-  
+  background: linear-gradient(135deg, #b3e5fc, #e1bee7);
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.admin-dashboard h1 {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 20px;
+.admin-dashboard {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.admin-dashboard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.admin-dashboard-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #0f172a;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.admin-dashboard-title:hover {
+  color: #1d4ed8;
+}
+
+.no-access {
+  color: #dc2626;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: #fff1f2;
+  border-radius: 8px;
 }
 
 .dashboard-section {
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
 }
 
 .dashboard-section h2 {
   font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: #444;
+  font-weight: 600;
+  color: #1d4ed8;
+  margin-bottom: 1rem;
 }
 
 .stats {
   display: flex;
-  gap: 20px;
   flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
 }
 
 .stat-box {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  flex: 1 1 200px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  font-size: 1.2rem;
-  color: #2e5bff;
-  font-weight: bold;
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  font-weight: 500;
+  color: #374151;
   text-align: center;
+  flex: 1;
+  min-width: 150px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.back-button,
+.logout-button {
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.back-button {
+  background-color: #6b7280;
+  color: #ffffff;
+}
+
+.back-button:hover {
+  background-color: #4b5563;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.logout-button {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+.logout-button:hover {
+  background-color: #b91c1c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.back-button:focus,
+.logout-button:focus {
+  outline: 2px solid #ffcc00;
+  outline-offset: 2px;
+}
+
+.dashboard-footer {
+  text-align: center;
+  padding: 1rem;
+  color: #333;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-top: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .admin-dashboard-container {
+    padding: 1.5rem;
+  }
+
+  .admin-dashboard {
+    padding: 1.5rem;
+  }
+
+  .admin-dashboard-title {
+    font-size: 1.5rem;
+  }
+
+  .dashboard-section h2 {
+    font-size: 1.25rem;
+  }
+
+  .stat-box {
+    font-size: 0.95rem;
+    padding: 0.75rem;
+    min-width: 120px;
+  }
+
+  .back-button,
+  .logout-button {
+    font-size: 0.95rem;
+    padding: 0.6rem 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-dashboard-container {
+    padding: 1rem;
+  }
+
+  .admin-dashboard {
+    padding: 1rem;
+  }
+
+  .admin-dashboard-title {
+    font-size: 1.25rem;
+  }
+
+  .dashboard-section h2 {
+    font-size: 1.1rem;
+  }
+
+  .stat-box {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    min-width: 100%;
+  }
+
+  .stats {
+    flex-direction: column;
+  }
+
+  .back-button,
+  .logout-button {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .no-access {
+    font-size: 1rem;
+  }
+
+  .dashboard-footer {
+    font-size: 0.85rem;
+  }
 }
